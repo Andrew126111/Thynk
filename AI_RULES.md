@@ -62,3 +62,4 @@ This document governs how AI assistants (and humans) work on the Thynk codebase.
 
 - Commit after every ticket with a concise, conventional message (e.g. `feat:`, `fix:`, `chore:`, `docs:`).
 - Push changes only when the user asks or after an explicitly requested commit.
+- After every ticket, provide a summary of what changed (files modified, verification, and any recommendations).
