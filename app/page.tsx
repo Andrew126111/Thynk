@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { HeroEntrance } from "@/components/home/HeroEntrance";
 import { Container } from "@/components/layout/Container";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Section } from "@/components/layout/Section";
@@ -64,22 +65,30 @@ export default function Home() {
     <PageLayout>
       <Section>
         <Container className="flex flex-col items-center gap-4 text-center">
-          <p className="text-small font-medium tracking-widest text-primary uppercase">
-            Communication Training
-          </p>
-          <Heading className="text-display">
-            Train your mind.
-            <br />
-            Master your communication.
-          </Heading>
-          <Body className="max-w-2xl text-muted-foreground">
-            Thynk helps you practice thinking on the spot, researching quickly,
-            and communicating clearly with AI-powered feedback.
-          </Body>
-          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-            <Button>Start Practicing</Button>
-            <Button variant="outline">See How It Works</Button>
-          </div>
+          <HeroEntrance>
+            <p
+              data-entrance
+              className="text-small font-medium tracking-widest text-primary uppercase"
+            >
+              Communication Training
+            </p>
+            <Heading data-entrance className="text-display">
+              Train your mind.
+              <br />
+              Master your communication.
+            </Heading>
+            <Body data-entrance className="max-w-2xl text-muted-foreground">
+              Thynk helps you practice thinking on the spot, researching
+              quickly, and communicating clearly with AI-powered feedback.
+            </Body>
+            <div
+              data-entrance
+              className="mt-4 flex flex-col gap-3 sm:flex-row"
+            >
+              <Button>Start Practicing</Button>
+              <Button variant="outline">See How It Works</Button>
+            </div>
+          </HeroEntrance>
         </Container>
       </Section>
 
