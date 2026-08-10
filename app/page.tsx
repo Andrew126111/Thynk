@@ -6,6 +6,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Section } from "@/components/layout/Section";
 import { Body } from "@/components/ui/Body";
 import { Heading } from "@/components/ui/Heading";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Subheading } from "@/components/ui/Subheading";
 import { Button } from "@/components/ui/button";
 import {
@@ -92,50 +93,54 @@ export default function Home() {
         </Container>
       </Section>
 
-      <Section>
-        <Container className="flex flex-col items-center gap-4 text-center">
-          <Subheading>Why Thynk</Subheading>
-          <Body className="max-w-2xl text-muted-foreground">
-            Three ways Thynk helps you communicate with confidence.
-          </Body>
-        </Container>
-        <Container className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {valueProps.map((item) => (
-            <Card key={item.title}>
-              <CardHeader>
-                <CardTitle>{item.title}</CardTitle>
-                <CardDescription>{item.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
-        </Container>
-      </Section>
+      <ScrollReveal>
+        <Section>
+          <Container className="flex flex-col items-center gap-4 text-center">
+            <Subheading>Why Thynk</Subheading>
+            <Body className="max-w-2xl text-muted-foreground">
+              Three ways Thynk helps you communicate with confidence.
+            </Body>
+          </Container>
+          <Container className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {valueProps.map((item) => (
+              <Card key={item.title}>
+                <CardHeader>
+                  <CardTitle>{item.title}</CardTitle>
+                  <CardDescription>{item.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </Container>
+        </Section>
+      </ScrollReveal>
 
-      <Section>
-        <Container className="flex flex-col items-center gap-4 text-center">
-          <Subheading>How It Works</Subheading>
-          <Body className="max-w-2xl text-muted-foreground">
-            Four steps from challenge to feedback.
-          </Body>
-        </Container>
-        <Container className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step) => (
-            <Card key={step.number}>
-              <CardHeader>
-                <CardTitle>
-                  <span className="flex items-center gap-3">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
-                      {step.number}
+      <ScrollReveal>
+        <Section>
+          <Container className="flex flex-col items-center gap-4 text-center">
+            <Subheading>How It Works</Subheading>
+            <Body className="max-w-2xl text-muted-foreground">
+              Four steps from challenge to feedback.
+            </Body>
+          </Container>
+          <Container className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step) => (
+              <Card key={step.number}>
+                <CardHeader>
+                  <CardTitle>
+                    <span className="flex items-center gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+                        {step.number}
+                      </span>
+                      {step.title}
                     </span>
-                    {step.title}
-                  </span>
-                </CardTitle>
-                <CardDescription>{step.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
-        </Container>
-      </Section>
+                  </CardTitle>
+                  <CardDescription>{step.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </Container>
+        </Section>
+      </ScrollReveal>
 
       <Section>
         <Container className="flex flex-col items-center gap-4 text-center">

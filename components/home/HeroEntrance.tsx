@@ -3,7 +3,7 @@
 import { animate, stagger } from "animejs";
 import { useEffect, useRef, type ReactNode } from "react";
 
-import { motion } from "@/lib/animation";
+import { motion, prefersReducedMotion } from "@/lib/animation";
 
 export function HeroEntrance({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -11,9 +11,7 @@ export function HeroEntrance({ children }: { children: ReactNode }) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    if (prefersReducedMotion()) return;
 
     const targets = root.querySelectorAll("[data-entrance]");
     if (targets.length === 0) return;
