@@ -1,65 +1,146 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+
+import { Container } from "@/components/layout/Container";
+import { PageLayout } from "@/components/layout/PageLayout";
+import { Section } from "@/components/layout/Section";
+import { Body } from "@/components/ui/Body";
+import { Heading } from "@/components/ui/Heading";
+import { Subheading } from "@/components/ui/Subheading";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Thynk — Communication Coaching",
+  description:
+    "Train your mind and master your communication with AI-powered practice.",
+};
+
+const valueProps = [
+  {
+    title: "Think Faster",
+    description:
+      "Practice researching unfamiliar topics under time pressure.",
+  },
+  {
+    title: "Speak Better",
+    description: "Present your ideas clearly and confidently.",
+  },
+  {
+    title: "Improve Continuously",
+    description: "Receive personalized AI feedback after every session.",
+  },
+];
+
+const steps = [
+  {
+    number: "1",
+    title: "Receive a challenge",
+    description: "Get a real-world topic handed to you on the spot.",
+  },
+  {
+    number: "2",
+    title: "Research the topic without AI",
+    description: "Build knowledge with your own effort and speed.",
+  },
+  {
+    number: "3",
+    title: "Present your findings",
+    description: "Deliver a clear, confident, structured answer.",
+  },
+  {
+    number: "4",
+    title: "Receive AI-powered feedback",
+    description: "Learn exactly where you shine and how to improve.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <PageLayout>
+      <Section>
+        <Container className="flex flex-col items-center gap-4 text-center">
+          <p className="text-small font-medium tracking-widest text-primary uppercase">
+            Communication Training
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          <Heading className="text-display">
+            Train your mind.
+            <br />
+            Master your communication.
+          </Heading>
+          <Body className="max-w-2xl text-muted-foreground">
+            Thynk helps you practice thinking on the spot, researching quickly,
+            and communicating clearly with AI-powered feedback.
+          </Body>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+            <Button>Start Practicing</Button>
+            <Button variant="outline">See How It Works</Button>
+          </div>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container className="flex flex-col items-center gap-4 text-center">
+          <Subheading>Why Thynk</Subheading>
+          <Body className="max-w-2xl text-muted-foreground">
+            Three ways Thynk helps you communicate with confidence.
+          </Body>
+        </Container>
+        <Container className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {valueProps.map((item) => (
+            <Card key={item.title}>
+              <CardHeader>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </Container>
+      </Section>
+
+      <Section>
+        <Container className="flex flex-col items-center gap-4 text-center">
+          <Subheading>How It Works</Subheading>
+          <Body className="max-w-2xl text-muted-foreground">
+            Four steps from challenge to feedback.
+          </Body>
+        </Container>
+        <Container className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step) => (
+            <Card key={step.number}>
+              <CardHeader>
+                <CardTitle>
+                  <span className="flex items-center gap-3">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+                      {step.number}
+                    </span>
+                    {step.title}
+                  </span>
+                </CardTitle>
+                <CardDescription>{step.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </Container>
+      </Section>
+
+      <Section>
+        <Container className="flex flex-col items-center gap-4 text-center">
+          <Subheading className="text-heading">
+            Ready to improve how you communicate?
+          </Subheading>
+          <Body className="max-w-2xl text-muted-foreground">
+            Practice a little today. Speak a little better tomorrow.
+          </Body>
+          <div className="mt-4">
+            <Button>Start Practicing</Button>
+          </div>
+        </Container>
+      </Section>
+    </PageLayout>
   );
 }
