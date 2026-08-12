@@ -3,3 +3,7 @@ export type PracticeStage =
   | "research"
   | "presentation"
   | "feedback";
+
+export interface PracticeSessionData {
+  notes: string;
+}
