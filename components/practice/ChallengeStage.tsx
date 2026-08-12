@@ -15,7 +15,11 @@ const challengeInfo = [
   { label: "Research Restriction", value: challengeMock.researchRestriction },
 ];
 
-export function ChallengeStage() {
+export function ChallengeStage({
+  onStartResearch,
+}: {
+  onStartResearch?: () => void;
+}) {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center">
       <p className="text-small font-medium tracking-widest text-primary uppercase">
@@ -35,7 +39,7 @@ export function ChallengeStage() {
           </Card>
         ))}
       </div>
-      <Button size="lg" className="mt-2">
+      <Button size="lg" className="mt-2" onClick={onStartResearch}>
         Start Research
       </Button>
     </div>
