@@ -11,14 +11,24 @@ import { ResearchStage } from "./ResearchStage";
 
 export function PracticeSession() {
   const [stage, setStage] = useState<PracticeStage>("challenge");
-  const [sessionData] = useState<PracticeSessionData>({ notes: "" });
+  const [sessionData, setSessionData] = useState<PracticeSessionData>({
+    notes: "",
+  });
+
+  const updateNotes = (notes: string) => {
+    setSessionData({ ...sessionData, notes });
+  };
 
   return (
     <FadeIn key={stage}>
       {stage === "challenge" ? (
         <ChallengeStage onStartResearch={() => setStage("research")} />
       ) : stage === "research" ? (
-        <ResearchStage onTransition={() => setStage("presentation")} />
+        <ResearchStage
+          notes={sessionData.notes}
+          onNotesChange={updateNotes}
+          onTransition={() => setStage("presentation")}
+        />
       ) : stage === "presentation" ? (
         <PresentationStage
           notes={sessionData.notes}

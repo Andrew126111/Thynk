@@ -7,17 +7,24 @@ import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/button";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useCountdown } from "@/hooks/useCountdown";
 import { challengeMock } from "@/lib/practice";
 import { formatMMSS } from "@/utils/format";
 
 export function ResearchStage({
+  notes,
+  onNotesChange,
   onTransition,
 }: {
+  notes: string;
+  onNotesChange: (notes: string) => void;
   onTransition?: () => void;
 }) {
   const duration = challengeMock.researchDurationSeconds;
@@ -62,6 +69,23 @@ export function ResearchStage({
           <CardTitle>{challengeMock.topic}</CardTitle>
           <CardDescription>{challengeMock.researchRestriction}</CardDescription>
         </CardHeader>
+      </Card>
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Research Notes</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Label htmlFor="research-notes" className="sr-only">
+            Research Notes
+          </Label>
+          <Textarea
+            id="research-notes"
+            value={notes}
+            onChange={(event) => onNotesChange(event.target.value)}
+            placeholder="Write down key facts, arguments, examples, and ideas..."
+            className="min-h-32 text-left"
+          />
+        </CardContent>
       </Card>
       <Button size="lg" className="mt-2" onClick={onTransition}>
         I&rsquo;m Ready

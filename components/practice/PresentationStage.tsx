@@ -78,9 +78,10 @@ export function PresentationStage({
         <CardHeader>
           <CardTitle>{challengeMock.topic}</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-3">
+          <Subheading>Your Research Notes</Subheading>
           {notes.trim().length > 0 ? (
-            <Body className="text-muted-foreground">{notes}</Body>
+            <Body className="text-muted-foreground whitespace-pre-wrap">{notes}</Body>
           ) : (
             <Body className="text-muted-foreground">No notes yet.</Body>
           )}
