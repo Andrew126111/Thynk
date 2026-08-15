@@ -19,13 +19,17 @@ import { formatMMSS } from "@/utils/format";
 
 type PresentationMode = "ready" | "presenting" | "confirming";
 
+type PresentationStageProps = {
+  topic: string;
+  notes: string;
+  onComplete: () => void;
+};
+
 export function PresentationStage({
+  topic,
   notes,
   onComplete,
-}: {
-  notes: string;
-  onComplete?: () => void;
-}) {
+}: PresentationStageProps) {
   const [mode, setMode] = useState<PresentationMode>("ready");
   const { remainingSeconds, isComplete, start } = useCountdown(
     challengeMock.presentationDurationSeconds
@@ -76,7 +80,7 @@ export function PresentationStage({
 
       <Card className="w-full text-left">
         <CardHeader>
-          <CardTitle>{challengeMock.topic}</CardTitle>
+          <CardTitle>{topic}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
           <Subheading>Your Research Notes</Subheading>

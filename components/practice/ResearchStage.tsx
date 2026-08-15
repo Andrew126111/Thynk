@@ -18,15 +18,19 @@ import { useCountdown } from "@/hooks/useCountdown";
 import { challengeMock } from "@/lib/practice";
 import { formatMMSS } from "@/utils/format";
 
+type ResearchStageProps = {
+  topic: string;
+  notes: string;
+  onNotesChange: (notes: string) => void;
+  onTransition: () => void;
+};
+
 export function ResearchStage({
+  topic,
   notes,
   onNotesChange,
   onTransition,
-}: {
-  notes: string;
-  onNotesChange: (notes: string) => void;
-  onTransition?: () => void;
-}) {
+}: ResearchStageProps) {
   const duration = challengeMock.researchDurationSeconds;
   const { remainingSeconds, isComplete, start } = useCountdown(duration);
   const completedRef = useRef(false);
@@ -66,7 +70,7 @@ export function ResearchStage({
       </Body>
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>{challengeMock.topic}</CardTitle>
+          <CardTitle>{topic}</CardTitle>
           <CardDescription>{challengeMock.researchRestriction}</CardDescription>
         </CardHeader>
       </Card>

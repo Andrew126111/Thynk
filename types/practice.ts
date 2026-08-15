@@ -5,5 +5,6 @@ export type PracticeStage =
   | "feedback";
 
 export interface PracticeSessionData {
+  topic: string;
   notes: string;
 }

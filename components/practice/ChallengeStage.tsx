@@ -9,6 +9,11 @@ import {
 } from "@/components/ui/card";
 import { challengeMock } from "@/lib/practice";
 
+type ChallengeStageProps = {
+  topic: string;
+  onStartResearch: () => void;
+};
+
 const challengeInfo = [
   { label: "Research Time", value: challengeMock.researchTime },
   { label: "Presentation Time", value: challengeMock.presentationTime },
@@ -16,16 +21,15 @@ const challengeInfo = [
 ];
 
 export function ChallengeStage({
+  topic,
   onStartResearch,
-}: {
-  onStartResearch?: () => void;
-}) {
+}: ChallengeStageProps) {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center">
       <p className="text-small font-medium tracking-widest text-primary uppercase">
         Today&rsquo;s Challenge
       </p>
-      <Heading>{challengeMock.topic}</Heading>
+      <Heading>{topic}</Heading>
       <Caption>
         Placeholder challenge — sample data until live topics are available.
       </Caption>
