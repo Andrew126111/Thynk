@@ -1,3 +1,5 @@
+import type { Transcript } from "./transcription";
+
 export type PracticeStage =
   | "challenge"
   | "research"
@@ -7,4 +9,5 @@ export type PracticeStage =
 export interface PracticeSessionData {
   topic: string;
   notes: string;
+  transcript: Transcript | null;
 }
