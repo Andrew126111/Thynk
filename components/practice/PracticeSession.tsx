@@ -16,9 +16,15 @@ export function PracticeSession() {
     topic: challengeMock.topic,
     notes: "",
   });
+  const [recording, setRecording] = useState<Blob | null>(null);
 
   const updateNotes = (notes: string) => {
     setSessionData((prev) => ({ ...prev, notes }));
+  };
+
+  const handlePresentationComplete = (audioBlob: Blob | null) => {
+    setRecording(audioBlob);
+    setStage("feedback");
   };
 
   return (
@@ -39,10 +45,10 @@ export function PracticeSession() {
         <PresentationStage
           topic={sessionData.topic}
           notes={sessionData.notes}
-          onComplete={() => setStage("feedback")}
+          onComplete={handlePresentationComplete}
         />
       ) : (
-        <FeedbackStage />
+        <FeedbackStage recording={recording} />
       )}
     </FadeIn>
   );

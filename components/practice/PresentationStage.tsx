@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Body } from "@/components/ui/Body";
 import { Caption } from "@/components/ui/Caption";
@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useAudioRecorder } from "@/hooks/useAudioRecorder";
 import { useCountdown } from "@/hooks/useCountdown";
 import { challengeMock } from "@/lib/practice";
 import { formatMMSS } from "@/utils/format";
@@ -22,7 +23,7 @@ type PresentationMode = "ready" | "presenting" | "confirming";
 type PresentationStageProps = {
   topic: string;
   notes: string;
-  onComplete: () => void;
+  onComplete: (recording: Blob | null) => void;
 };
 
 export function PresentationStage({
@@ -34,23 +35,39 @@ export function PresentationStage({
   const { remainingSeconds, isComplete, start } = useCountdown(
     challengeMock.presentationDurationSeconds
   );
+  const { isRecording, error, startRecording, stopRecording } =
+    useAudioRecorder();
   const completedRef = useRef(false);
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+
+  const finishRecording = useCallback(async () => {
+    const recording = await stopRecording();
+    onComplete(recording);
+  }, [onComplete, stopRecording]);
 
   useEffect(() => {
     if (isComplete && !completedRef.current) {
       completedRef.current = true;
-      onComplete?.();
+      void finishRecording();
     }
-  }, [isComplete, onComplete]);
+  }, [isComplete, finishRecording]);
+
+  useEffect(() => {
+    if (error) {
+      startButtonRef.current?.focus();
+    }
+  }, [error]);
 
   const finish = () => {
     if (!completedRef.current) {
       completedRef.current = true;
-      onComplete?.();
+      void finishRecording();
     }
   };
 
-  const beginPresentation = () => {
+  const beginPresentation = async () => {
+    const started = await startRecording();
+    if (!started) return;
     setMode("presenting");
     start();
   };
@@ -66,6 +83,21 @@ export function PresentationStage({
       </Heading>
 
       <div className="flex flex-col items-center gap-2">
+        {mode === "presenting" && isRecording && (
+          <div
+            role="status"
+            aria-live="polite"
+            className="flex items-center gap-2 rounded-full border border-border bg-muted/50 px-3 py-1"
+          >
+            <span
+              aria-hidden="true"
+              className="size-2.5 rounded-full bg-destructive"
+            />
+            <Caption className="font-medium text-destructive">
+              Recording
+            </Caption>
+          </div>
+        )}
         <p className="text-small font-medium tracking-widest text-muted-foreground uppercase">
           {mode === "ready" ? "Maximum Time" : "Remaining Time"}
         </p>
@@ -77,6 +109,18 @@ export function PresentationStage({
           {formatMMSS(remainingSeconds)}
         </p>
       </div>
+
+      {error && (
+        <div
+          role="alert"
+          className="w-full max-w-md rounded-lg border border-warning/50 bg-warning/10 p-4"
+        >
+          <Body className="text-foreground">
+            We couldn&rsquo;t access your microphone. Please check your browser
+            permissions and try again.
+          </Body>
+        </div>
+      )}
 
       <Card className="w-full text-left">
         <CardHeader>
@@ -92,12 +136,13 @@ export function PresentationStage({
         </CardContent>
       </Card>
 
-      {mode === "presenting" && (
-        <Caption>Microphone input will be connected here.</Caption>
-      )}
-
       {mode === "ready" && (
-        <Button size="lg" className="mt-2" onClick={beginPresentation}>
+        <Button
+          ref={startButtonRef}
+          size="lg"
+          className="mt-2"
+          onClick={beginPresentation}
+        >
           Start Presentation
         </Button>
       )}
